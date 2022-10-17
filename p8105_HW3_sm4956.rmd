@@ -165,3 +165,19 @@ ny_noaa = ny_noaa %>%
  as_tibble (ny_noaa)
 ```
 `r skimr:: skim(ny_noaa)`
+
+- **Describing the dataset ny_noaa**:
+* The total number of observations/rows are **`r nrow(ny_noaa)`** and the total number of variables/columns are **`r ncol(ny_noaa)`**
+* The key variables in this data set are **`r colnames(ny_noaa)`**
+* There are 3 character type of variables: id, tmax, tmin. tmax and tmin are max and min temperatures in tenths of mm
+* There is 1 date type of variable: Date
+* There are 3 numeric type of variables: prcp (precipitation in tenths of mm), snow (snowfall in mm), snwd (snowdepth in mm)  
+
+- **Missing data**: 
+* tmax: **`r sum(is.na(ny_noaa$tmax))`** observations
+* tmin: **`r sum(is.na(ny_noaa$tmin))`** observations
+* prcp: **`r sum(is.na(ny_noaa$prcp))`** observations
+* snow: **`r sum(is.na(ny_noaa$snow))`** observations
+* snwd: **`r sum(is.na(ny_noaa$snwd))`** observations
+
+
