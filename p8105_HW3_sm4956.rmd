@@ -180,4 +180,22 @@ ny_noaa = ny_noaa %>%
 * snow: **`r sum(is.na(ny_noaa$snow))`** observations
 * snwd: **`r sum(is.na(ny_noaa$snwd))`** observations
 
+cleaning the data
+```{r}
+ny_noaa_clean = ny_noaa %>%
+  janitor::clean_names() %>%
+  separate(col= date, into = c("year", "month", "day"), sep ='-', convert = TRUE) %>%
+  mutate (month = month.abb[month],
+    tmax = as.numeric(tmax),
+          tmin = as.numeric(tmin),
+          prcp = prcp/10) %>%
+  select (id, year, month, day, everything ()) %>%
+  mutate (tmax = tmax/10, tmin = tmin/10)
+```
+
+`r skimr:: skim(ny_noaa_clean)`
+
+* the most commonly observed values for snowfall is **`r names(which.max(table(ny_noaa_clean$snow)))`**
+This could be so because there is no snowfall on most of the days of the year in the city.
+
 
