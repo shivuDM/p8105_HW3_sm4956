@@ -127,17 +127,17 @@ Describing the dataset:
 Aggregating across minutes to create a total activity variable for each day, and creating a table showing these totals
 ```{r summarizing by day and making table}
 agg_acc_ds = acc_ds %>%
-  group_by(day) %>%
+  group_by(week,day) %>%
   summarise (total_activity = sum(physical_activity)) %>%
   pivot_wider(names_from = day,
     values_from = total_activity) %>%
-  select ("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
+  select ("week","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
 
 agg_acc_ds %>%
     knitr::kable()
 ```
 
-* according to this, the physical activity (in minutes) is increasing and decreasing alternatively throughout the weekdays from Monday through Friday. It is higher on Wednesday, Thursday, Friday as compared to other weekdays- with **Friday being the weekday with highest physical activity**. The **activity is the least on Saturday.** 
+* looking at this closely, the physical activity (in minutes) is increasing and decreasing in various amounts throughout the weeks across Monday through Sunday. It seems to be overall higher on Wednesday, Thursday, Friday as compared to other weekdays and weekend- with **Friday being the weekday with highest physical activity**. The **activity is the least on Saturday.** 
 
 Plotting for 24 hour activity course for each day
 ```{r making plot, warning = FALSE}
@@ -218,8 +218,8 @@ ny_noaa_clean_plot1
 ```
 
 * According to this, it can be seen that **the average maximum temperature was lower overall in January as compared to July for the years 1981-2010**. Also, **the range of average maximum temperatures is wider for January than the range of average maximum temperatures for July**.
-There are some outliers **the most interpretable outliers for the month of July are during ~1988 = ~ 14 degree Celsius, during ~2003 = ~ 18 degree celsius**.
-**the most interpretable outliers for the month of January are during ~ 1982 = ~ -14 degree celsius**
+There are some outliers **the most interpretable outliers for the month of July are during ~1988 = ~ 14 degree Celsius, during ~2003 = ~ 18 degree Celsius**.
+the most interpretable outliers for the **month of January are during ~ 1982 = ~ -14 degree Celsius, and during ~2008 = ~ -7 degree Celsius **
 
 making 2-panel plots for tmax tmin and snowfall
 ```{r 2-panel plots for tmax tmin and snowfall}
