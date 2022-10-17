@@ -124,3 +124,18 @@ Describing the dataset:
 - The total number of observations/rows are **`r nrow(acc_ds)`** and the total number of variables/columns are **`r ncol(acc_ds)`**
 - The key variables in this data set are **`r colnames(acc_ds)`**
 
+Aggregating across minutes to create a total activity variable for each day, and creating a table showing these totals
+```{r summarizing by day and making table}
+agg_acc_ds = acc_ds %>%
+  group_by(day) %>%
+  summarise (total_activity = sum(physical_activity)) %>%
+  pivot_wider(names_from = day,
+    values_from = total_activity) %>%
+  select ("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
+
+agg_acc_ds %>%
+    knitr::kable()
+```
+
+* according to this, the physical activity (in minutes) is increasing and decreasing alternatively throughout the weekdays from Monday through Friday. It is higher on Wednesday, Thursday, Friday as compared to other weekdays- with **Friday being the weekday with highest physical activity**. The **activity is the least on Saturday.** 
+
