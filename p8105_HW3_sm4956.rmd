@@ -101,4 +101,26 @@ This data set contains `r nrow(instacart)` rows and `r ncol(instacart)` columns,
  - **dog food care**: snack sticks chicken and rice recipe dog treats: 30 times, organic chicken and brown rice recipe: 28 times, small dog biscuits: 26 times 
 * The mean hour of the day at which Coffee ice cream and Pink lady apples was delivered, displayed during the week.
 
+## Problem 2
+
+Loading and tidying the data, adding new variable
+
+```{r accelerometers cleaning, message = FALSE}
+acc_ds = read_csv(
+    "data/accel_data.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer (activity_1:activity_1440,
+names_to = "minute_act",
+names_prefix = "activity_",
+values_to = "physical_activity") %>%
+  mutate (minute_act = as.numeric (minute_act),
+          wd_vs_wknd = case_when (day == "Monday" ~ "weekday", day == "Tuesday" ~ "weekday", day == "Wednesday" ~ "weekday", day == "Thursday" ~ "weekday", day == "Friday" ~ "weekday", day == "Saturday" ~ "weekend",day == "Sunday" ~ "weekend"))
+ 
+```
+
+`r skimr:: skim(acc_ds)`
+
+Describing the dataset:
+- The total number of observations/rows are **`r nrow(acc_ds)`** and the total number of variables/columns are **`r ncol(acc_ds)`**
+- The key variables in this data set are **`r colnames(acc_ds)`**
 
