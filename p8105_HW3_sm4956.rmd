@@ -220,3 +220,35 @@ ny_noaa_clean_plot1
 * According to this, it can be seen that **the average maximum temperature was lower overall in January as compared to July for the years 1981-2010**. Also, **the range of average maximum temperatures is wider for January than the range of average maximum temperatures for July**.
 There are some outliers **the most interpretable outliers for the month of July are during ~1988 = ~ 14 degree Celsius, during ~2003 = ~ 18 degree celsius**.
 **the most interpretable outliers for the month of January are during ~ 1982 = ~ -14 degree celsius**
+
+making 2-panel plots for tmax tmin and snowfall
+```{r 2-panel plots for tmax tmin and snowfall}
+tmax_tmin = ny_noaa_clean %>%
+  ggplot(aes(x = tmax, y = tmin)) + 
+  geom_hex () + 
+  theme (legend.position = "right")+
+  labs (
+    title = "tmax vs tmin",
+    x = "tmax (C)",
+    y = "tmin (C)")
+
+tmax_tmin
+
+
+snowfall_year = ny_noaa_clean %>%
+  group_by (year) %>%
+  filter (snow %in% 1.0:99.0) %>%
+  ggplot(aes(x = snow, y = year, color = factor(year))) + 
+  geom_density_ridges() + 
+  theme(legend.position = "none")+
+  labs(
+    title = "Snowfall Distribution by Years",
+    x = "Snowfall (mm)",
+    y = "Year")
+
+snowfall_year
+
+tmax_tmin + snowfall_year
+```
+
+* made 2-panel plots for (i) tmax vs tmin for the full dataset- used hexagon plot for this and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year- used density ridges to plot this.
