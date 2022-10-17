@@ -198,4 +198,24 @@ ny_noaa_clean = ny_noaa %>%
 * the most commonly observed values for snowfall is **`r names(which.max(table(ny_noaa_clean$snow)))`**
 This could be so because there is no snowfall on most of the days of the year in the city.
 
+making 2-panel plots for avg max temperature:
+```{r making 2-panel plots for avg max temp for Jan and Jul}
+ny_noaa_clean_plot1 =  ny_noaa_clean %>% 
+  group_by(id, year, month) %>%
+  summarise(tmax_avg = mean(tmax), na.rm = TRUE)%>%
+  filter (month %in% c ("Jan", "Jul")) %>%
+  ggplot(aes(x = year, y = tmax_avg, color = id)) + 
+  geom_point(alpha = 0.5) + 
+  theme(legend.position = "none", axis.text.x = element_text(angle = 60, hjust = 1))+
+  facet_grid(.~ month)+
+  labs(
+    title = "Avg Max Temp plot for Jan and July",
+    x = "Year",
+    y = "Average Max temperature (C)")
+
+ny_noaa_clean_plot1
+  
+```
+
+
 
