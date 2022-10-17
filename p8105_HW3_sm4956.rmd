@@ -154,3 +154,14 @@ ggplot(plot_acc_ds, aes(x = hour, y = physical_activity, color = day)) +
 ```
 
 * According to this, the **physical activity increases everyday after 5:00 am and is maintained throughout the day till around 19:00 hrs**. It **peaks between about 19:00 to 22:00 hrs** and then gradually subsides. The **period from ~ 23:00 to 5:00 hrs in the morning is the lowest (implying the person sleeps during that time)**. The **activity around 19:00 hrs is the highest for Wednesday**.The **activity between around 19:00 through 22:00 hrs is the highest for Fridays**. **Daytime activity ~10:00 - ~12:00 is high for Sunday.**
+
+## Problem 3
+
+Reading ny_noaa dataset
+```{r}
+data("ny_noaa")
+
+ny_noaa = ny_noaa %>%
+ as_tibble (ny_noaa)
+```
+`r skimr:: skim(ny_noaa)`
